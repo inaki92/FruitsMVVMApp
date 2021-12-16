@@ -11,6 +11,7 @@ import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModel
 import com.inaki.fruitmvvmapp.R
 import com.inaki.fruitmvvmapp.viewmodel.FruitViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,9 +37,16 @@ class SearchFruitFragment : Fragment() {
     }
 
     /**
-     * Here we are providing the view model
+     * Here we are providing the view model with the jetpack component (fragment library)
      */
     private val viewModel: FruitViewModel by viewModels()
+
+    /**
+     * I am injecting the view model with KOIN using by viewModel()
+     *
+     * This will be taken from the view model module
+     */
+    private val koinViewModelInjected: FruitViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
