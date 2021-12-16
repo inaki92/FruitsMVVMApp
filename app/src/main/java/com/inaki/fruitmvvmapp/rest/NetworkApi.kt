@@ -1,13 +1,9 @@
 package com.inaki.fruitmvvmapp.rest
 
-import com.inaki.fruitmvvmapp.model.Fruits
 import com.inaki.fruitmvvmapp.model.FruitsItem
-import com.inaki.fruitmvvmapp.rest.NetworkApi.Companion.SEARCH_FRUIT
-import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface NetworkApi {
 
@@ -25,7 +21,7 @@ interface NetworkApi {
      * Getting all the fruits from server
      */
     @GET(ALL_FRUITS)
-    suspend fun retrieveAllFruits(): Response<Fruits>
+    suspend fun retrieveAllFruits(): Response<List<FruitsItem>>
 
     /**
      * This is the coroutines implementation to get specific fruit from network
