@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.inaki.fruitmvvmapp.R
 import com.inaki.fruitmvvmapp.databinding.FragmentFruitsBinding
-import com.inaki.fruitmvvmapp.model.Fruits
 import com.inaki.fruitmvvmapp.utils.ResponseState
-import com.inaki.fruitmvvmapp.utils.UIState
 import com.inaki.fruitmvvmapp.viewmodel.FruitViewModel
 
 // TODO: Rename parameter arguments, choose names that match

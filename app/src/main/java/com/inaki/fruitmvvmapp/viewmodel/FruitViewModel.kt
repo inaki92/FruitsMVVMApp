@@ -3,13 +3,15 @@ package com.inaki.fruitmvvmapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.inaki.fruitmvvmapp.model.FruitsItem
 import com.inaki.fruitmvvmapp.rest.NetworkApi
 import com.inaki.fruitmvvmapp.utils.UIState
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
-class FruitViewModel(
+class FruitViewModel @Inject constructor(
+    private val fruitApi: NetworkApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val coroutineScope: CoroutineScope = CoroutineScope(ioDispatcher)
 ) : ViewModel() {
@@ -17,7 +19,7 @@ class FruitViewModel(
     /**
      * This fruitApi will be injected by Dagger
      */
-    @Inject lateinit var fruitApi: NetworkApi
+    // @Inject lateinit var fruitApi: NetworkApi
 
     private val disposable by lazy {
         CompositeDisposable()
@@ -26,17 +28,17 @@ class FruitViewModel(
     /**
      * This is the mutable live data to be set in the RxJava call
      */
-    private var _allFruits: MutableLiveData<UIState> = MutableLiveData(UIState.Loading())
+    private var _allFruits: MutableLiveData<UIState<List<FruitsItem>, Throwable>> = MutableLiveData(UIState.Loading())
 
     /**
      * This is the immutable livedata to be observed in the UI
      *
      * UIState will propagate the loading, success or error, depending on the response
      */
-    val allFruits: LiveData<UIState> get() = _allFruits
+    val allFruits: LiveData<UIState<List<FruitsItem>, Throwable>> get() = _allFruits
 
-    private var _searchFruitLivaData: MutableLiveData<UIState> = MutableLiveData(UIState.Loading())
-    val searchFruit: LiveData<UIState> get() = _searchFruitLivaData
+    private var _searchFruitLivaData: MutableLiveData<UIState<FruitsItem, Throwable>> = MutableLiveData(UIState.Loading())
+    val searchFruit: LiveData<UIState<FruitsItem, Throwable>> get() = _searchFruitLivaData
 
     /**
      * This method will help to fetch the data from server and get all fruits

@@ -1,9 +1,18 @@
 package com.inaki.fruitmvvmapp.utils
 
-sealed class UIState(val state: ResponseState) {
-    class Loading(val isLoading: Boolean = true): UIState(ResponseState.LOADING)
-    class Success<T>(val data: T): UIState(ResponseState.SUCCESS)
-    class Error(val error: Throwable): UIState(ResponseState.ERROR)
+/**
+ * This sealed class will be a wrapper for the UIState like loading, success or error
+ *
+ * We are providing
+ */
+sealed class UIState<out T, out E>(
+    val state: ResponseState,
+    val data: T? = null,
+    val error: E? = null
+) {
+    class Loading<T> : UIState<T, Throwable>(ResponseState.LOADING)
+    class Success<T>(data: T): UIState<T, Throwable>(ResponseState.SUCCESS, data = data)
+    class Error<T>(error: Throwable): UIState<T, Throwable>(ResponseState.ERROR, error = error)
 }
 
 enum class ResponseState {
