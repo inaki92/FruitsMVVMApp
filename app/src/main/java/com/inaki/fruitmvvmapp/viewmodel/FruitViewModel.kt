@@ -10,6 +10,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class FruitViewModel(
+    private val fruitApi: NetworkApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val coroutineScope: CoroutineScope = CoroutineScope(ioDispatcher)
 ) : ViewModel() {
@@ -17,7 +18,7 @@ class FruitViewModel(
     /**
      * This fruitApi will be injected by Dagger
      */
-    @Inject lateinit var fruitApi: NetworkApi
+    // @Inject lateinit var fruitApi: NetworkApi
 
     private val disposable by lazy {
         CompositeDisposable()
